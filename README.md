@@ -1,2 +1,2 @@
 # CG-Rasterisation
-Rasterisation for CG course
+Rasterisation project for CG course
