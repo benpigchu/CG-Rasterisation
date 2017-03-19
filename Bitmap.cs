@@ -5,7 +5,7 @@ namespace Rasterisation{
 		public byte r,g,b;
 	}
 	public class Bitmap{
-		public Color[,] data;
+		Color[,] data;
 		public Bitmap(int x,int y){
 			data=new Color[x,y];
 		}
@@ -13,10 +13,8 @@ namespace Rasterisation{
 			get{return data[x,y];}
 			set{data[x,y]=value;}
 		}
-		public int x{get{return data.GetLength(0);}}
-		public int y{get{return data.GetLength(1);}}
-		public override String ToString(){
-			return $"<Bitmap {x}x{y}>";
-		}
+		public int x=>data.GetLength(0);
+		public int y=>data.GetLength(1);
+		public override String ToString()=>$"<Bitmap {x}x{y}>";
 	}
 }

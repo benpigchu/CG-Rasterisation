@@ -1,19 +1,19 @@
 using System;
 
 namespace Rasterisation{
-	struct Point{
-		public int x,y;
+	public struct Point{
+		public float x,y;
 		public override string ToString(){
 			return $"({x},{y})";
 		}
 	}
-	class Polygon{
+	public class Polygon{
 		Point[] data;
 		public Polygon(Point[] points){
 			data=points;
 		}
-		public override string ToString(){
-			return $"<Polygon [{string.Join(",",data)}]>";
-		}
+		public Point this[int i]=>data[i];
+		public int length=>data.Length;
+		public override string ToString()=>$"<Polygon [{string.Join(",",data)}]>";
 	}
 }
