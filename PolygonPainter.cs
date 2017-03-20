@@ -12,15 +12,13 @@ namespace Rasterisation{
 			List<EdgeRecord>[] record=new List<EdgeRecord>[bitmap.y+1];
 			for(int i=0;i<polygon.length;i++){
 				Point p1=polygon[i],p2=polygon[(i+1>=polygon.length)?0:(i+1)];
-				Console.WriteLine($"{p1} {p2}");
 				int y1=(int)(Math.Ceiling(p1.y));
 				int y2=(int)(Math.Ceiling(p2.y));
-				Console.WriteLine($"{y1} {y2}");
 				if(y1<0){y1=0;}
 				if(y2<0){y2=0;}
 				if(y1>bitmap.y){y2=bitmap.y;}
 				if(y2>bitmap.y){y2=bitmap.y;}
-				if(y1==y2){break;}
+				if(y1==y2){continue;}
 				Point pBegin,pEnd;
 				int yBegin,yEnd;
 				if(y1>y2){
@@ -40,7 +38,6 @@ namespace Rasterisation{
 					record[yBegin]=new List<EdgeRecord>();
 				}
 				record[yBegin].Add(new EdgeRecord{x=x,dx=dx,ymax=yEnd});
-				Console.WriteLine($"--add {yBegin} {yEnd} {x} {dx}");
 			}
 			List<EdgeRecord> intersect=new List<EdgeRecord>();
 			for(int line=0;line<bitmap.y;line++){
@@ -49,7 +46,6 @@ namespace Rasterisation{
 				}
 				intersect.RemoveAll((edge)=>edge.ymax<=line);
 				intersect.Sort((edge1,edge2)=>Comparer<float>.Default.Compare(edge1.x,edge2.x));
-				Console.WriteLine(string.Join(",",intersect));
 				if(intersect.Count%2!=0){
 					throw new Exception("Odd edges!");
 				}
@@ -62,7 +58,6 @@ namespace Rasterisation{
 					if(rPoint<0){lPoint=0;}
 					if(lPoint>bitmap.x){lPoint=bitmap.x;}
 					if(rPoint>bitmap.x){lPoint=bitmap.x;}
-					Console.WriteLine($"{lPoint} -> {rPoint}");
 					for(int point=lPoint;point<=rPoint;point++){
 						bitmap[point,line]=color;
 					}
